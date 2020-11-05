@@ -1,0 +1,12 @@
+FROM node:alpine
+
+WORKDIR '/app'
+
+COPY package.json .
+RUN yarn install
+
+COPY . .
+
+CMD [ "yarn", "start" ]
+
+# docker run -it -p 3000:3000 CONTAINER_ID

@@ -1,0 +1,20 @@
+version: '3'
+services:
+  web:
+    stdin_open: true # ensure app does not exit on code 0
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - '3000:3000'
+    volumes:
+      - /app/node_modules
+      - .:/app # . stands for current working directory, : for mapping
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /app/node_modules
+      - .:/app
+    command: ['yarn', 'test']
